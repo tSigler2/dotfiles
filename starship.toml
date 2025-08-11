@@ -1,0 +1,57 @@
+format = "$directory$git_branch$python$java$golang$rust$c$cpp$ruby$lua$haskell$zig$erlang$cobol$dotnet $docker_context $character"
+
+[directory]
+style = "bold lavender"
+
+[character]
+success_symbol = "[➜](bold pink)"
+error_symbol = "[✗](bold red)"
+
+[git_branch]
+style = "green"
+format = "{[$branch]($style)}"
+
+[python]
+style = "yellow"
+format = "([$symbol$version]($style)<[$virtualenv]($style)>)"
+
+[java]
+format = "([$symbol$version]($style))"
+
+[golang]
+format = "([$symbol$version]($style))"
+
+[rust]
+format = "([$symbol$version]($style))"
+
+[c]
+format = "([$symbol]($style))"
+
+[cpp]
+format = "([$symbol$version]($style))"
+
+[ruby]
+format = "([$symbol$version]($style))"
+
+[lua]
+detect_files = ['.lua-version', '.stylua.toml', '.luacheckrc']
+format = "([$symbol$version]($style))"
+
+[haskell]
+format = "([$symbol$version]($style))"
+
+[zig]
+format = "([$symbol$version]($style))"
+
+[erlang]
+format = "([$symbol$version]($style))"
+
+[cobol]
+format = "([$symbol$version]($style))"
+
+[docker_context]
+format = "[$context]($style)"
+
+[dotnet]
+detect_extensions = ['csproj', 'fsproj', 'xproj', 'cs']
+format = "[$symbol$version]($style)"

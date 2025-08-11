@@ -1,0 +1,3 @@
+nvim/after/*
+nvim/plugin/*
+keymap.md
