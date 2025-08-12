@@ -4,8 +4,8 @@
 	process = git-lfs filter-process
 	required = true
 [user]
-	name = <name>
-	email = <email>
+	name = <Name>
+	email = <Email>
 
 [alias]
     yank-main = "!f() {\
@@ -15,3 +15,36 @@
         git checkout \"$branch\"\
         git merge main; \
     }"
+
+[color]
+    branch = "auto"
+    ui = "auto"
+
+[color "branch"]
+    current = "green"
+    local = "red"
+    remote = "cyan"
+
+[push]
+    default = current
+
+[help]
+    autocorrect = 1
+
+[rerere]
+    enabled = true
+
+[checkout]
+    defaultRemote = origin
+
+[alias]
+    st = status -sb
+    co = checkout
+    br = branch
+    ci = commit
+    lg = log --oneline --graph --decorate --all
+    amend = commit --amend --no-edit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    fix = commit --fixup
+    squash = rebase -i --autosquash
