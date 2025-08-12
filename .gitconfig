@@ -7,15 +7,6 @@
 	name = <Name>
 	email = <Email>
 
-[alias]
-    yank-main = "!f() {\
-        branch=$(git rev-parse --abbrev-ref HEAD) && \
-        git checkout main && \
-        git pull origin main && \
-        git checkout \"$branch\"\
-        git merge main; \
-    }"
-
 [color]
     branch = "auto"
     ui = "auto"
@@ -48,3 +39,10 @@
     last = log -1 HEAD
     fix = commit --fixup
     squash = rebase -i --autosquash
+    yank-main = "!f() {\
+        branch=$(git rev-parse --abbrev-ref HEAD) && \
+        git checkout main && \
+        git pull origin main && \
+        git checkout \"$branch\"\
+        git merge main; \
+    }"
