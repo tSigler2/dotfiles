@@ -79,4 +79,5 @@ require("packer").startup(function()
 	})
 
 	use("lukas-reineke/indent-blankline.nvim")
+    use('mg979/vim-visual-multi')
 end)
