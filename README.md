@@ -9,6 +9,7 @@ My dotfiles for my shell, code editor, and global git config.
     - zsh-syntax-highlighting: Syntax highlighting before command execution to display whether the command is recognized in the current context
     - zsh-autosuggestions: Autosuggestions for commands with autocompletion based on command history
     - eza: Modern, flexible ls replacement written in Rust
+
 - Text Editor: Neovim
     - Packer: Neovim plugin manager
     - Telescope: Neovim file fuzzy finder
@@ -22,6 +23,28 @@ My dotfiles for my shell, code editor, and global git config.
     - Nvim-Tree: File Tree Display
     - LuaSnip: Snippet Manager with common VSCode snippet integration
     - Vim-Visual-Multi: Multi-Cursor editing in Neovim
+
 - Terminal Emulator: Wezterm
     - Default Shell: zsh
     - Default Terminal Multiplexer: tmux
+
+- Global Package Manager: Homebrew
+
+## Dependencies for this Repository Running Correctly
+
+### Installed
+- Neovim
+- Wezterm
+- Tmux
+- Git
+- Zsh
+    - Starship
+    - fzf
+    - zsh-syntax-highlighting
+    - zsh-autosuggestions
+    - eza
+    - rbenv
+
+Command:
+- Homebrew: `brew install nvim wezterm zsh-autosuggestions zsh-syntax-highlighting eza fzf starship rbenv`
+- Packer (inside Neovim): `:PackerSync`
