@@ -6,6 +6,7 @@ vim.api.nvim_set_keymap(
     [[<cmd>lua require('luasnip').expand_or_jump()<CR>]],
     { silent = true, noremap = true }
 )
+
 vim.api.nvim_set_keymap(
     's',
     '<C-k>',
@@ -16,12 +17,16 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('i', '<C-h>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true, noremap = true })
 vim.api.nvim_set_keymap('s', '<C-h>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true, noremap = true })
 
+-- Enter Telescope in Live Grep Mode
 vim.keymap.set('n', '<tab>', function()
     require('telescope.builtin').live_grep({ cwd = vim.loop.cwd() })
 end, { noremap = true, silent = true })
 
+-- Global Enter Telescope and nvim-tree
 vim.keymap.set('n', '<C-k>', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<C-m>', ':Telescope<CR>')
+
+-- Highlight Toggle
 vim.keymap.set('n', '<C-l>', function()
     if vim.opt.hlsearch:get() == true then
         vim.opt.hlsearch = false
@@ -33,11 +38,14 @@ vim.keymap.set('n', '<C-l>', function()
         end
     end
 end)
+
+-- Key to automatically vertical split
 vim.keymap.set('n', '<leader>v', function()
     vim.cmd('vsplit')
     vim.cmd('wincmd =')
 end)
 
+-- Telescope keybindings
 require('Telescope').setup({
     defaults = {
         mappings = {
@@ -55,6 +63,7 @@ require('Telescope').setup({
     },
 })
 
+-- nvim-tree keybindings
 local function on_attach(bufnr)
     local api = require('nvim-tree.api')
 
@@ -81,3 +90,13 @@ end
 require('nvim-tree').setup({
     on_attach = on_attach,
 })
+
+-- Keybind Global Search and Replace
+vim.keymap.set('n', '<leader>r', function()
+    local search = vim.fn.input('Search Word: ')
+    if search == '' then
+        return
+    end
+    local repl = vim.fn.input('Replacement Word: ')
+    vim.cmd(string.format('%%s/%s/%s/g', search, repl))
+end)
