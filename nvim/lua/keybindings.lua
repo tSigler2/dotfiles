@@ -23,7 +23,7 @@ vim.keymap.set('n', '<tab>', function()
 end, { noremap = true, silent = true })
 
 -- Global Enter Telescope and nvim-tree
-vim.keymap.set('n', '<C-k>', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<C-[>', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<C-m>', ':Telescope<CR>')
 
 -- Highlight Toggle
@@ -91,7 +91,7 @@ require('nvim-tree').setup({
     on_attach = on_attach,
 })
 
--- Keybind Global Search and Replace
+--Keybind Search and Replace
 vim.keymap.set('n', '<leader>r', function()
     local search = vim.fn.input('Search Word: ')
     if search == '' then
@@ -100,3 +100,11 @@ vim.keymap.set('n', '<leader>r', function()
     local repl = vim.fn.input('Replacement Word: ')
     vim.cmd(string.format('%%s/%s/%s/g', search, repl))
 end)
+
+--Multiple Cursors
+vim.keymap.set({ 'n', 'i' }, '<C-j>', '<Cmd>MultipleCursorsAddDown<CR>')
+vim.keymap.set({ 'n', 'i' }, '<C-k>', '<Cmd>MultipleCursorsAddUp<CR>')
+vim.keymap.set({ 'n', 'i' }, '<leader>v', '<Cmd>MultipleCursorsAddVisualArea<CR>')
+vim.keymap.set({ 'n', 'i' }, '<leader>m', '<Cmd>MultipleCursorsAddMatches<CR>')
+vim.keymap.set({ 'n', 'i' }, '<leader>l', '<Cmd>MultipleCursorsAddJumpNextMatch<CR>')
+vim.keymap.set({ 'n', 'i' }, '<leader>h', '<Cmd>MultipleCursorsAddHJumpPrevMatch<CR>')
