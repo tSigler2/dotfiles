@@ -1,6 +1,13 @@
 require('packer').startup(function()
     use('wbthomason/packer.nvim')
-    use('folke/tokyonight.nvim')
+    use({
+        'folke/tokyonight.nvim',
+        config = function()
+            vim.g.tokyonight_style = 'storm'
+            vim.g.tokyonight_transparent = false
+            vim.cmd('colorscheme tokyonight')
+        end,
+    })
 
     use({
         'nvim-telescope/telescope.nvim',
@@ -79,5 +86,13 @@ require('packer').startup(function()
     })
 
     use('lukas-reineke/indent-blankline.nvim')
-    use('mg979/vim-visual-multi')
+    use({
+        'brenton-leighton/multiple-cursors.nvim',
+        version = '*',
+        config = function()
+            require('multiple-cursors').setup()
+        end,
+    })
+
+    use('stevearc/conform.nvim')
 end)

@@ -1,64 +1,76 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"go",
-		"gomod",
-		"python",
-		"javascript",
-		"lua",
-		"rust",
-		"c",
-		"cpp",
-		"typescript",
-		"erlang",
-		"java",
-		"ruby",
-		"zig",
-		"haskell",
-		"fortran",
-		"bash",
-		"cmake",
-		"make",
-	},
-	highlight = {
-		enable = true,
-	},
+local mason_registry = require('mason-registry')
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = { 'omnisharp', 'lua_ls' },
 })
 
-require("lspconfig").gopls.setup({
-	on_attach = function(client, bufnr)
-		if client.server_capabilities.documentFormattingProvider then
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ async = false })
-				end,
-			})
-		end
-	end,
+require('nvim-treesitter.configs').setup({
+    ensure_installed = {
+        'go',
+        'gomod',
+        'python',
+        'javascript',
+        'lua',
+        'rust',
+        'c',
+        'cpp',
+        'typescript',
+        'erlang',
+        'java',
+        'ruby',
+        'zig',
+        'haskell',
+        'fortran',
+        'bash',
+        'cmake',
+        'make',
+        'bicep',
+    },
+    highlight = {
+        enable = true,
+    },
 })
 
-require("lspconfig").pylsp.setup({
-	on_attach = function(client, bufnr)
-		if client.server_capabilities.documentFormattingProvider then
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ async = false })
-				end,
-			})
-		end
-	end,
+vim.lsp.config('gopls', {
+    on_attach = function(client, bufnr)
+        if client.server_capabilities.documentFormattingProvider then
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({ async = false })
+                end,
+            })
+        end
+    end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
-	callback = function()
-		vim.cmd("silent! !clang-format -i %")
-	end,
+vim.lsp.config('pylsp', {
+    on_attach = function(client, bufnr)
+        if client.server_capabilities.documentFormattingProvider then
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({ async = false })
+                end,
+            })
+        end
+    end,
 })
 
-local mason_registry = require("mason-registry")
-require("mason").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = { "omnisharp" },
+require('conform').setup({
+    formatters_by_ft = {
+        lua = { 'stylua' },
+    },
+    format_on_save = {
+        lsp_fallback = true, -- Fallback to LSP formatting if no specific formatter is found
+        async = false,
+        timeout_ms = 1000,
+    },
+})
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = { '*.c', '*.cpp', '*.h', '*.hpp' },
+    callback = function()
+        vim.cmd('silent! !clang-format -i %')
+    end,
 })
