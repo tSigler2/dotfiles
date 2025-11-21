@@ -22,7 +22,7 @@ My dotfiles for my shell, code editor, and global git config.
     - Lualine: Context Display
     - Nvim-Tree: File Tree Display
     - LuaSnip: Snippet Manager with common VSCode snippet integration
-    - Vim-Visual-Multi: Multi-Cursor editing in Neovim
+    - multipe-cursors.nvim: Multi-Cursor editing in Neovim
 
 - Terminal Emulator: Wezterm
     - Default Shell: zsh
