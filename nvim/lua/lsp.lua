@@ -44,18 +44,34 @@ vim.lsp.config('gopls', {
     end,
 })
 
-vim.lsp.config('pylsp', {
+vim.lsp.config.ruff = {
+    cmd = { 'ruff', 'server' },
+    filetypes = { 'python' },
+    init_options = {
+        settings = {
+            -- Prefer filesystem config (pyproject.toml / ruff.toml)
+            configurationPreference = 'filesystemFirst',
+        },
+    },
     on_attach = function(client, bufnr)
         if client.server_capabilities.documentFormattingProvider then
             vim.api.nvim_create_autocmd('BufWritePre', {
                 buffer = bufnr,
                 callback = function()
-                    vim.lsp.buf.format({ async = false })
+                    vim.lsp.buf.format({
+                        bufnr = bufnr,
+                        timeout_ms = 2000,
+                        filter = function(c)
+                            return c.name == 'ruff'
+                        end,
+                    })
                 end,
             })
         end
     end,
-})
+}
+
+vim.lsp.enable('ruff')
 
 require('conform').setup({
     formatters_by_ft = {
